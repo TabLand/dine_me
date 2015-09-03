@@ -1,0 +1,50 @@
+body{
+	background-image:url('diningCloth.png');
+	text-align:center;
+	
+}
+#plate1{
+	background-image:url('plate.png');
+	height:600px;
+	width:600px;
+	margin: auto auto auto auto;
+	text-align: center;
+}
+#plateTxt{
+	margin: 150px auto 150px 75px;
+}
+.diningRed{
+	text-decoration:none;
+	color: #f00;
+}
+
+input{
+	border:1px red solid;
+}
+#plateWho, #plateTxt, #plateWhere, #plateCost, #plateEmail, #plateNumbers, #plateWhy, #plateConfirm, #plateTime, #plateDate, #plateAvailability, #plateFailure, #plateSuccess{
+	position:absolute;
+	width: 450px;
+	display:none;
+}
+#plateWhere, #plateWhy, #plateNumbers, #plateCost, #plateEmail, #plateWho, #plateTime, #plateDate{
+	margin: 100px 0 0 75px;
+}
+#plateConfirm{
+	margin: 30px 0 0 75px;
+	font-size: 25px;
+}
+#plateAvailability{
+	margin: 30px 0 0 75px;
+	font-size:35px;
+}
+#minSlider, #hourSlider, #durSlider{
+	font-size:15px;
+	background-color:#f00;
+	margin-top:15px;
+}
+.timeLabel{
+	font-size:15px;
+}
+#plateSuccess{
+	margin: 250px 0 0 100px
+}

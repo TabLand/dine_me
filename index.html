@@ -1,0 +1,299 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title>Dine Me!</title>
+		<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="../style.css">
+		<link rel="stylesheet" type="text/css" href="dine.css">
+		<link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.9.2.custom.css" />
+		<script src="js/jquery-2.0.3.min.js"></script>
+		<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+	</head>
+	<body>
+		<div id="plate1">
+			<form action="dine.php" id="dinnerForm" method="get">
+				<div id="plateTxt">
+					Dine Me!<br/>
+					So, You asked me to lunch, and I sent you this link.<br/>
+					Not to worry, just taking some necessary info. <br/><a href="#who" class="diningRed forward">OK!</a>
+				</div>
+				<div id="plateWho">
+					<a href="#home" class="diningRed back">Back</a><br/>
+					Who are you?
+					<input id="nameInput" type="text" name="who" placeholder="Eg Paul Allen"><br/>
+					<a href="#where" class="diningRed forward nameAction">Next</a>
+				</div>
+				<div id="plateWhere">
+					<a href="#who" class="diningRed back">Back</a><br/>
+					Right, "<span id="nameOutput"></span>". Where are we meeting up?
+					<input id="placeInput" type="text" name="where" placeholder="Eg Dorsia"><br/>
+					<a href="#why" class="diningRed forward placeAction">Keep Going</a>
+				</div>
+				<div id="plateWhy">
+					<a href="#where" class="diningRed back">Back</a><br/>
+					Why are we meeting up? And Reservations at <span id="placeOutput"></span>?? How the hell did a dimwit like you swing that?
+					<input id="whyInput" type="text" name="why" placeholder="I know the Maitre D'"><br/>
+					<a href="#date" class="diningRed forward">Onwards</a>
+				</div>
+				<div id="plateDate">
+					<a href="#why" class="diningRed back">Back</a><br/>
+					Hmm. Not really believable.. What date?
+					<input id="dateInput" type="text" name="date" placeholder="Today"><br/>
+					<a href="#time" class="diningRed forward">Move -&gt;</a>
+				</div>
+				<div id="plateTime">
+					<a href="#date" class="diningRed back">Back</a><br/>
+					And what time?
+					<input id="timeInput" type="text" name="time" placeholder="Now"><br/>
+					<span class="timeLabel">Hour:</span><div id="hourSlider"></div>
+					<span class="timeLabel">Minute:</span><div id="minSlider"></div>
+					<span class="timeLabel">Duration:</span><div id="durSlider"></div>
+					<a href="#numbers" class="diningRed forward availability">Check Availability</a>
+				</div>
+				<div id="plateAvailability">
+					<a href="#time" class="diningRed back">Back</a><br/>
+					<span id="clashNotifier"></span><br/>
+					<a href="#cost" class="diningRed forward">Upwards and Straightwards!</a>
+				</div>
+				<div id="plateNumbers">
+					<a href="#time" class="diningRed back">Back</a><br/>
+					How many people are coming?
+					<input id="numbersInput" type="text" name="numbersInput" placeholder="Eg a wedding load of"><br/>
+					<input id="numbersNumber" type="hidden" name="numbersNumber"/>
+					<span id="numbersAssumption"></span><br/>
+					<a href="#cost" class="diningRed forward">This is getting tiring..</a>
+				</div>
+				<div id="plateCost">
+					<a href="#numbers" class="diningRed back">Back</a><br/>
+					How much does it cost per head? I need to watch my budget..<br/>
+					&pound;<input id="costInput" type="text" name="cost" placeholder="100"><br/>
+					<a href="#email" class="diningRed forward budgetComplain">Last, I promise!</a>
+				</div>
+				<div id="plateEmail">
+					<a href="#cost" class="diningRed back">Back</a><br/>
+					<span id="BudgetComplainText"></span>
+					Now, your personal email address for *cough* <strike>SPAM</strike> confirmation.
+					<input id="emailInput" type="text" name="email" placeholder="pallen@pierceandpierce.com"><br/>
+					<a href="#confirm" class="diningRed forward confirmations">Cook!</a>
+				</div>
+				<div id="plateConfirm">
+					<a href="#email" class="diningRed back">Back</a><br/>
+					<span class="diningRed"> Read this to Confirm!!</span><br/>
+					<span id="plateConfirmOutput"></span><br/>
+					<a id="finish" href="#finish" class="diningRed">This will really Cook! Promise!</a>
+				</div>
+				<div id="plateFailure">
+					Oh noes! Failed to book you in because <span id="failureReason"></span>
+					Sorries! Retry?
+				</div>
+				<div id="plateSuccess">
+					<span class="diningRed">Success! Booking cooked!</span>
+				</div>
+				<script>
+					function forward(){
+						if(count>=0){
+						     $(progression[count]).fadeOut(1000);
+     						     $(progression[count+1]).fadeIn(1000);
+						     count +=1;
+						}
+					}
+					progression = Array("#plateTxt","#plateWho","#plateWhere","#plateWhy","#plateDate","#plateTime", "#plateAvailability","#plateNumbers","#plateCost","#plateEmail", "#plateConfirm");
+					var count = 0;
+					//each click of the forward link changes the behaviour of the forward and backward links
+					$(progression[count]).fadeIn(1000);
+					
+					$(".forward").bind("click", forward);
+					$("input").bind("keypress", function(e){
+						if(e.which==13){
+							forward();
+						}
+					});
+					$(".back").bind("click", function(){
+					   	if(count>0){
+     					     		$(progression[count]).fadeOut(1000);
+     					     		$(progression[count-1]).fadeIn(1000);
+     					     		count -=1;
+     					     	}
+     					});
+					$(".availability").bind("click",function(){
+					     availability();
+					});
+					$(".budgetComplain").bind("click",function(){
+					     $("#BudgetComplainText").html("&pound;" + $("#costInput").val() + "?? You know I can't afford that! You're paying!");
+					});
+					$(".nameAction").bind("click", function() {
+     					     $("#nameOutput").html($("#nameInput").val());
+					});
+					$(".placeAction").bind("click", function() {
+     					     $("#placeOutput").html($("#placeInput").val());
+					});
+				        $("#numbersInput").bind("keydown", function(){
+     						total = numbersCalculate();
+     					     	$("#numbersAssumption").html("I'm assuming <span class=\"diningRed\">"+total+"</span> people");
+     					     	$("#numbersNumber").val(total);
+					});
+					$("#numbersInput").bind("keyup", function(){
+     						total = numbersCalculate();
+     					     	$("#numbersAssumption").html("I'm assuming <span class=\"diningRed\">"+total+"</span> people");
+    					     	$("#numbersNumber").val(total);
+					});
+					//confirmations
+					$(".confirmations").bind("click", confirmation);
+					$("#finish").bind("click",function(){
+						//fade out!
+						$("#plateConfirm").fadeOut(1000);
+						
+						date = $("#dateInput").val();
+						times= $("#timeInput").val().split(" till " );
+						starttime = date + "T" + times[0] + ":00%2B01:00";
+						endtime = date + "T" + times[1] + ":00%2B01:00";
+						$.ajax({
+							url: "../calendar/book.php?timeMin="+starttime + "&timeMax=" + endtime + "&who="+ $("#nameInput").val() +"&where="+$("#placeInput").val()+"&email="+$("#emailInput").val()+"&why="+$("#whyInput").val()+"&numbersNumbers="+$("#numbersNumber").val()+"&cost=" +$("#costInput").val(),
+							success: function(data){
+								//console.log(data);
+								if(data.status=="success") {
+									//success
+									alert("success!!");
+									$("#plateSuccess").fadeIn(1000);
+								}
+								else {
+									alert("failure");//failure
+									$("#plateFailure").fadeIn(1000);
+								}
+							},
+								dataType:"json"
+							});
+					});
+					
+					function numbersCalculate(){
+						if(!isNaN(parseInt($("#numbersInput").val()))){
+							return parseInt($("#numbersInput").val());
+						}
+						else {
+							charray = $("#numbersInput").val().split("");
+	     					     	total = 0;
+     						     	for(char in charray){
+     						     		total += char.charCodeAt(0);
+     						     	}
+     						     	return total;
+     						}
+					}
+					function confirmation(){
+     					     payer = " I'm expecting you to pick up the tab. ";
+     					     //fill text here:
+     					     reason = $("#whyInput").val();
+       					     reason = reason.replace("I am ", "you are ");
+       					     reason = reason.replace("I'd ", "you'd ");
+     					     reason = reason.replace("I ", "you ");
+       					     reason = reason.replace("I'm ", "you're ");
+       					     reason = reason.replace("Im ", "you're ");
+       					     reason = reason.replace("Ive ", "you've ");
+       					     reason = reason.replace("I've ", "you've ");
+       					     reason = reason.replace("Id ", "you'd ");
+       					     reason = reason.replace("I'd ", "you'd ");
+      					     reason = reason.replace("I'll ", "you'll ");
+      					     reason = reason.replace("Ill ", "you'll ");
+     					     output = "Your name is \""+$("#nameInput").val()+"\". You want to have lunch at \""+$("#placeInput").val()+"\". This is because " + reason + ". You have invited " + $("#numbersInput").val() + " people. The number of which I assume to be <span class=\"diningRed\">" +numbersCalculate() +"</span>. It will cost <span class=\"diningRed\">&pound;" + $("#costInput").val() + "</span> per head." + payer + " Your email address is <span class=\"diningRed\">" + $("#emailInput").val() + "</span>. <span id=\"meetInPastNotifier\"></span>.";
+     					     $("#plateConfirmOutput").html(output);
+     					     meetInPast();
+     				}
+     				$("#dateInput").datepicker({
+     					dateFormat:"yy-mm-dd"
+     				});
+     				$("#dateInput").datepicker("hide");
+     				var minutes = 0;
+     				var hours = 0;
+     				var duration= 0;
+     				var duration = 0;
+     				$("#hourSlider").slider({
+     					min:0,
+     					max:23,
+     					step:1,
+     					change: function(event,ui){
+     						hours = ui.value;
+     						updateTimeInput();
+     					},
+     					slide : function(event,ui){
+     						hours = ui.value;
+     						updateTimeInput();
+     					}
+
+     				});
+     				$("#minSlider").slider({
+     					min:0,
+     					max:55,
+     					step:5,
+     					change: function(event,ui){
+     						minutes = ui.value;
+     						updateTimeInput();
+     					},
+     					slide : function(event,ui){
+     						minutes = ui.value;
+     						updateTimeInput();
+     					}
+     				});
+     				$("#durSlider").slider({
+     					min:0,
+     					max:120,
+     					step:10,
+     					change: function(event,ui){
+     						duration = ui.value;
+     						updateTimeInput();
+     					},
+     					slide : function(event,ui){
+     						duration = ui.value;
+     						updateTimeInput();
+     					}
+     				});
+				function updateTimeInput(){
+					if(minutes==0) min = "00";
+					else if(minutes<10) min = "0" + minutes;
+					else min = minutes;
+					if(((minutes + duration) % 60)==0) durmin="00";
+					else if(((minutes + duration) % 60)<10) durmin = "0" + ((minutes + duration) % 60);
+					else durmin = ((minutes + duration) % 60);
+					$("#timeInput").val((hours % 24) + ":" + min + " till " + ((hours + Math.floor((minutes + duration)/60))%24) + ":" + durmin);
+				}
+				function availability(){
+					date = $("#dateInput").val();
+					times= $("#timeInput").val().split(" till " );
+					starttime = date + "T" + times[0] + ":00%2B01:00";
+					endtime = date + "T" + times[1] + ":00%2B01:00";
+					//alert(starttime + " and " + endtime);
+					$.ajax({
+						url: "../calendar/simple.php?timeMin="+starttime + "&timeMax=" + endtime,
+						success: function(data){
+							//console.log(data);
+							processAvailability(data);
+						},
+						dataType:"json"
+						});
+				}
+				function processAvailability(data){
+					if(data.items.length>0){
+						$("#clashNotifier").html("Damn, that time clashes due to " + data.items[0].summary + " between "+ data.items[0].start.dateTime.split("T")[1].substring(0,5)+" and "+data.items[0].end.dateTime.split("T")[1].substring(0,5)+". You can go back and choose a different time and date. But anyways. ");
+					}
+					else {
+						//no clash, woop!
+						$("#clashNotifier").html("Great, no clashes. I should be able to make it! ");
+					}
+				}
+				function meetInPast(){
+					d = new Date($("#dateInput").val() + " " + $("#timeInput").val().split(" till ")[0]);
+					if(d<=(new Date())){
+						//in past!
+						$("#meetInPastNotifier").html("For some oddly strange reason you wish to meet me in the past. ");
+					}
+					else {
+						//in future
+						days = Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+						months = Array("January","February","March","April","May","June","July","August","September","October","November","December");
+						$("#meetInPastNotifier").html("You wish to meet me on " + days[d.getDay()] + " the " + d.getDate() + " of " + months[d.getMonth()] + " " +  d.getFullYear() + " at " + d.getHours() + " " + d.getMinutes() + " hours.");
+					}
+				}
+				</script>
+			</form>
+			<embed height="0px" width="0px" src="collins.mp3">
+		</div>
+	</body>
+</html>
