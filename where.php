@@ -9,9 +9,9 @@
 	<body id="plate">
         <div id="text">
             <form method="get" action="why.php">
-                Right <?php echo_name(); ?>, where are we meeting up?<br/>
+                Right <?php echo name(); ?>, where are we meeting up?<br/>
                 <input style="width:500px" type="text" name="where" placeholder="Dorsia, 3 Cromwell Road, Kensington, SW7 2HR"><br/>
-                <input type="hidden" name="who" value="<?php echo_name(); ?>"/>
+                <input type="hidden" name="who" value="<?php echo name(); ?>"/>
                 <input class="submit" type="submit" value="Next">
             </form>
         </div>

@@ -9,10 +9,10 @@
 	<body id="plate">
         <div id="text">
             <form method="get" action="when.php">
-                What, <?php echo_place(); ?>, how did a dimwit like you swing that?<br/>
+                What, <?php echo place(); ?>, how did a dimwit like you swing that?<br/>
                 <input style="width:500px" type="text" name="why" placeholder="I know the Maitre d'"><br/>
-                <input type="hidden" name="who" value="<?php echo_name(); ?>"/>
-                <input type="hidden" name="where" value="<?php echo_place(); ?>"/>
+                <input type="hidden" name="who" value="<?php echo name(); ?>"/>
+                <input type="hidden" name="where" value="<?php echo place(); ?>"/>
                 <input class="submit" type="submit" value="Next">
             </form>
         </div>
