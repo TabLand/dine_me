@@ -1,50 +1,56 @@
-body{
-	background-image:url('diningCloth.png');
-	text-align:center;
-	
-}
-#plate1{
-	background-image:url('plate.png');
-	height:600px;
-	width:600px;
-	margin: auto auto auto auto;
-	text-align: center;
-}
-#plateTxt{
-	margin: 150px auto 150px 75px;
-}
-.diningRed{
-	text-decoration:none;
-	color: #f00;
+@font-face
+{
+    font-family: cicle;
+    src: url(fonts/Cicle_Gordita.ttf);
 }
 
-input{
-	border:1px red solid;
-}
-#plateWho, #plateTxt, #plateWhere, #plateCost, #plateEmail, #plateNumbers, #plateWhy, #plateConfirm, #plateTime, #plateDate, #plateAvailability, #plateFailure, #plateSuccess{
-	position:absolute;
-	width: 450px;
-	display:none;
-}
-#plateWhere, #plateWhy, #plateNumbers, #plateCost, #plateEmail, #plateWho, #plateTime, #plateDate{
-	margin: 100px 0 0 75px;
-}
-#plateConfirm{
-	margin: 30px 0 0 75px;
+body,input,button {
+	font-family:'Josefin Sans',cicle;
 	font-size: 25px;
+	text-align: center;
 }
-#plateAvailability{
-	margin: 30px 0 0 75px;
-	font-size:35px;
+a    {
+	text-decoration: none;
+	color: red
 }
-#minSlider, #hourSlider, #durSlider{
-	font-size:15px;
-	background-color:#f00;
-	margin-top:15px;
+html,body {
+    height: 90%;
+    width: 100%;    
 }
-.timeLabel{
-	font-size:15px;
+body {
+	background-color: transparent;
+	color: black;
+    overflow-x: hidden;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
 }
-#plateSuccess{
-	margin: 250px 0 0 100px
+body#outer{
+	background-image:url('diningCloth.png');
+	text-align:center;
+}
+#plate{
+    height: 600px;
+	width: 600px;
+    text-align: center;
+    background-image: url('plate.png');
+}
+
+iframe#plate_frame {
+    height: 600px;
+    width: 600px;
+    overflow: hidden;
+    border: none;
+}
+
+div#text{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+input.submit{
+    background-color: transparent;
+    border: none;
+    color: red;    
 }
