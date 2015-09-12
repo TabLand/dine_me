@@ -9,7 +9,7 @@
 	<body id="plate">
         <div id="text">
             <form method="get" action="when.php">
-                What, <?php echo place(); ?>, how did a dimwit like you swing that?<br/>
+                What? Reservations at <?php echo place(); ?>?? How did a dimwit like you swing that?<br/>
                 <input style="width:500px" type="text" name="why" placeholder="I know the Maitre d'"><br/>
                 <input type="hidden" name="who" value="<?php echo name(); ?>"/>
                 <input type="hidden" name="where" value="<?php echo place(); ?>"/>

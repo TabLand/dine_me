@@ -11,14 +11,21 @@
         <div id="text">
             <form method="get" action="confirm.php">
             <?php
-                    $who      = who();
-                    $where    = where();
+                    $who      = name();
+                    $where    = place();
                     $when     = when();
                     $duration = duration();
                     $hours    = hours();
                     $email    = email();
-                    if(free()) $free_or_busy = "free";
-                    else       $free_or_busy = "busy";
+                    $why      = reason();
+                    $busy     = busy();
+
+                    $calendar_link = "<a href='../calendar'>schedule</a>";
+
+                    if($busy == -1) $am_free_or_busy = "may be free at that time but am unable to confirm.";
+                    elseif($busy) $am_free_or_busy = " am busy with $busy commitments during that time.<br> Feel free to check my $calendar_link.";
+                    else $am_free_or_busy = "am free at that time.";
+
                     if(is_valid_email()) {
                         $a_valid_email = "valid";
                         $may_or_may_not = "may";
@@ -27,10 +34,10 @@
                         $a_valid_email = "invalid";
                         $may_or_may_not = "may not";
                     }
-                    echo "So your name is $who.". 
-                         "You want to meet at $where on $when for $duration $hours because $why."
-                         "I think I am $free_or_busy at that time." 
-                         "You can be contacted at $email," 
+                    echo "So your name is $who.<br>" . 
+                         "You want to meet at $where on $when hours for $duration $hours because $why.<br>" .
+                         "I think I $am_free_or_busy<br>" .
+                         "You can be contacted at $email,<br>" .
                          "which to me looks to be $a_valid_email therefore I $may_or_may_not try to respond.";
                 ?>
                 <input type="hidden" name="email" value="<?php echo email();?>"/>
@@ -39,6 +46,7 @@
                 <input type="hidden" name="why" value="<?php echo reason(); ?>"/>
                 <input type="hidden" name="who" value="<?php echo name(); ?>"/>
                 <input type="hidden" name="where" value="<?php echo place(); ?>"/>
+                <input type="hidden" name="email" value="<?php echo email(); ?>"/>
                 <input class="submit" type="submit" value="Submit">
                 <div class="g-recaptcha" data-sitekey="6LcXawwTAAAAAFAxIAo0YQc3HiluzzAyxX9MI66D"></div>
             </form>

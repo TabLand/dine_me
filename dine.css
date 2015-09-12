@@ -33,7 +33,6 @@ body#outer{
     height: 600px;
 	width: 600px;
     text-align: center;
-    background-image: url('plate.png');
 }
 
 iframe#plate_frame {
@@ -41,6 +40,7 @@ iframe#plate_frame {
     width: 600px;
     overflow: hidden;
     border: none;
+    background-image: url('plate.png');
 }
 
 div#text{

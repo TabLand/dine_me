@@ -9,7 +9,7 @@
 	<body id="plate">
         <div id="text">
             <form method="get" action="email.php">
-                So you would like to meet up at <?php echo when();?> for 
+                So you would like to meet up at <br><?php echo when();?> hours <br> for 
                 <?php 
                     echo duration() . hours();
                 ?>.<br/>
