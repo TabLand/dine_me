@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="dine.css">
+		<link rel="stylesheet" type="text/css" href="dine.css?v=0.1">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
         <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>

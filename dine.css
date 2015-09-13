@@ -9,14 +9,17 @@ body,input,button {
 	font-size: 25px;
 	text-align: center;
 }
+
 a    {
 	text-decoration: none;
 	color: red
 }
+
 html,body {
     height: 90%;
     width: 100%;    
 }
+
 body {
 	background-color: transparent;
 	color: black;
@@ -25,14 +28,21 @@ body {
     -moz-transform-style: preserve-3d;
     transform-style: preserve-3d;
 }
+
 body#outer{
 	background-image:url('diningCloth.png');
 	text-align:center;
 }
+
 #plate{
-    height: 600px;
-	width: 600px;
+    height: 540px;
+	width: 540px;
     text-align: center;
+    padding: 30px;
+}
+
+div.g-recaptcha > div > div {
+    margin: auto;
 }
 
 iframe#plate_frame {
