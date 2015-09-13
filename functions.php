@@ -24,10 +24,10 @@
     function reason(){
         if(isset($_GET["why"])) $reason = $_GET["why"];
         else $reason = "you know the maitre d'";
-        preg_match('/[A-Za-z\.\' ]+/', $reason, $matches);
+        preg_match('/[A-Za-z\.\' ,\-?]+/', $reason, $matches);
 
         if(count($matches) > 0) return $matches[0];
-        else return "you know the maitre d'";   
+        else return "I know the Maitre D'";   
     }
 
     function sanitize_when(){
@@ -46,10 +46,9 @@
         else return 1;
     }
     
-    function hours(){
-         $hours = duration();
-         if($hours > 1) return " hours";
-         else return " hour";
+    function plural($number, $text){
+         if($number > 1) return $text . 's';
+         else return $text;
     }
 
     function when(){
@@ -123,29 +122,39 @@
         return count($busy);
     }
 
-    function subject_swap($reason){
-        $swap = array();
-    
-        $swap["yourself"] = "myself";
-        $swap["myself"]   = "yourself";
-        $swap["you've"]   = "I have";
-        $swap["yours"]    = "mine";
-        $swap["you'd"]    = "I would or I had";
-        $swap["mine"]     = "yours";
-        $swap["your"]     = "my";
-        $swap["i've"]     = "you have";
-        $swap["i'd"]      = "you would or you had";
-        $swap["you"]      = "I";
-        $swap["me"]       = "you";
-        $swap["my"]       = "your";
-        $swap["i"]        = "you";
+    function swap_subjects($reason){
+        $swaps = array();
+        //ideally implement this http://www.learnersdictionary.com/qa/when-to-use-i-and-when-to-use-me
+        //TODO If a 2nd person subject is preceded by a verb or a conjunction, it should be mapped to me, otherwise I
+        //Look for exceptions
+        $swaps["know you"] = "know me";
+        $swaps["yourself"] = "myself";
+        $swaps["you are"]  = "I am";
+        $swaps["myself"]   = "yourself";
+        $swaps["you've"]   = "I have";
+        $swaps["you're"]   = "I am";
+        $swaps["yours"]    = "mine";
+        $swaps["you'd"]    = "I would or I had";
+        $swaps["mine"]     = "yours";
+        $swaps["your"]     = "my";
+        $swaps["i am"]     = "you are";
+        $swaps["i've"]     = "you have";
+        $swaps["i'm"]      = "you are";
+        $swaps["i'd"]      = "you would or you had";
+        $swaps["you"]      = "I";
+        $swaps["me"]       = "you";
+        $swaps["my"]       = "your";
+        $swaps["i"]        = "you";
 
-        //do a case insensitive regex search and replace on word boundaries,
-        //replacing the keys with their md5s until the key pass is finished
-        //then replacing the md5 hashes with the values
-    }
+        foreach($swaps as $from => $to) {
+            $from_hash = md5($from);
+            $reason = preg_replace("/\b$from\b/i",$from_hash,$reason);
+        }
 
-    function reason_with_subjects_swapped(){
-    
+        foreach($swaps as $from => $to) {
+            $from_hash = md5($from);
+            $reason = preg_replace("/\b$from_hash\b/",$to,$reason);
+        }
+        return $reason;
     }
 ?>

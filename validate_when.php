@@ -11,7 +11,7 @@
             <form method="get" action="email.php">
                 So you would like to meet up at <br><?php echo when();?> hours <br> for 
                 <?php 
-                    echo duration() . hours();
+                    echo duration() . plural(duration()," hour");
                 ?>.<br/>
                 Did I get that right?<br/>
                 <input type="hidden" name="duration" value="<?php echo duration(); ?>"/>

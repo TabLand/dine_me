@@ -11,19 +11,21 @@
         <div id="text">
             <form method="get" action="confirm.php">
             <?php
-                    $who      = name();
-                    $where    = place();
-                    $when     = when();
-                    $duration = duration();
-                    $hours    = hours();
-                    $email    = email();
-                    $why      = reason();
-                    $busy     = busy();
-
-                    $calendar_link = "<a href='../calendar'>schedule</a>";
+                    $who         = name();
+                    $where       = place();
+                    $when        = when();
+                    $duration    = duration();
+                    $hours       = plural(duration(),"hour");
+                    $email       = email();
+                    $why         = swap_subjects(reason());
+                    $busy        = busy();
+                    $commitments = plural($busy, "commitment");
+                    $schedule    = "<a href='../calendar'>schedule</a>";
 
                     if($busy == -1) $am_free_or_busy = "may be free at that time but am unable to confirm.";
-                    elseif($busy) $am_free_or_busy = " am busy with $busy commitments during that time.<br> Feel free to check my $calendar_link.";
+                    elseif($busy) $am_free_or_busy = " am busy with $busy $commitments during that time.<br>
+                                                       Maybe its because I have to return some videotapes.<br>
+                                                       Feel free to check my $schedule.";
                     else $am_free_or_busy = "am free at that time.";
 
                     if(is_valid_email()) {
