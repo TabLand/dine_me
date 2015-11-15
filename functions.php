@@ -1,7 +1,7 @@
 <?php
     include "google_calendar_key.php";
     //todo - migrate to hi@ijtaba.me.uk
-    define("CALENDAR" ,"ijtabahussainvidia@gmail.com");
+    define("CALENDAR" ,"hi@ijtaba.me.uk");
 
     function name(){
         if(isset($_GET["who"])) $name = $_GET["who"];
@@ -32,10 +32,10 @@
 
     function sanitize_when(){
         if(isset($_GET["when"])) $when = $_GET["when"];
-        else $when = "today 1pm";
+        else $when = "tomorrow 1pm";
         preg_match('/[A-Za-z\-0-9\ ]+/', $when, $matches);
         if(count($matches) > 0) return $matches[0];
-        else return "today 1pm";
+        else return "tomorrow 1pm";
     }
 
     function duration(){

@@ -64,3 +64,7 @@ input.submit{
     border: none;
     color: red;    
 }
+div.g-recaptcha{
+    width: 304px;
+    margin: 0 auto 0 auto;    
+}
