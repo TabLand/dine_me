@@ -1,0 +1,3 @@
+<Files secrets.php>
+    deny from all
+</Files>
