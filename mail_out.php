@@ -1,35 +1,12 @@
 <?php 
     require "functions.php";
-    require "mailer/class.phpmailer.php";
-    require "mailer/class.smtp.php";
 
     function send_mail($body, $email, $name){
-        $mail = new PHPMailer;
-
-        $mail->SMTPDebug = 3;                               // Enable verbose debug output
-
-        $mail->isSMTP();                                      // Set mailer to use SMTP
-        $mail->Host = MAILHOST;
-        $mail->SMTPAuth = true;                               // Enable SMTP authentication
-        $mail->Username = EMAIL;                 // SMTP username
-        $mail->Password = PASSWORD;                           // SMTP password
-        $mail->SMTPSecure = ENCRYPTION;                            // Enable TLS encryption, `ssl` also accepted
-        $mail->Port = PORT;                                    // TCP port to connect to
-
-        $mail->setFrom('hi@ijtaba.me.uk', 'Dine Bot');
-        $mail->addAddress('ijtabahussain@live.com', 'Ijtaba Hussain');     // Add a recipient
-        $mail->addReplyTo($email, 'Information');
-        $mail->isHTML(true);                                  // Set email format to HTML
-
-        $mail->Subject = "$name wants to meet up";
-        $mail->Body    = $body;
-
-        if(!$mail->send()) {
-            error_log('Mailer Error: ' . $mail->ErrorInfo);
-            return 'Message could not be sent.';
-        } else {
-            return 'Message has been sent';
-        }
+        $headers  = "From: Dine Bot <dine@ijtaba.me.uk>\r\n";
+        $headers .= "Reply-To: $name <$email>\r\n";
+        $to       = "ijtabahussain@live.com";
+        $subject  = "$name wants to meet up";
+        mail($to, $subject, $body, $headers);        
     }
 
     function verify_captcha(){
@@ -70,14 +47,17 @@
                     $mail_text = "Who:   $who\r\n" .
                                  "Where: $where\r\n" .
                                  "When:  $when\r\n" .
-                                 "Duration: $duration\r\n" .
+                                 "Duration: $duration hour(s) \r\n" .
                                  "Email: $email\r\n" .
                                  "Reason: $why\r\n";
 
-//                    if(verify_captcha()){
+                    if(verify_captcha()){
                         send_mail($mail_text,$email,$who);
                         echo "Mail sent, now you must wait for me to respond.";
-//                    }
+                    }
+                    else {
+                        echo "Captcha failed, I don't dine with robots";
+                    }
 
             ?>
         </div>
