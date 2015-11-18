@@ -9,7 +9,7 @@
     </head>
 	<body id="plate">
         <div id="text">
-            <form method="get" action="confirm.php">
+            <form method="get" action="mail_out.php">
             <?php
                     $who         = name();
                     $where       = place();

@@ -1,13 +1,41 @@
 <?php 
     require "functions.php";
     require "mailer/class.phpmailer.php";
-    require "mailer/class.phpmailer.php";
-    require "secrets.php";
+    require "mailer/class.smtp.php";
+
+    function send_mail($body, $email, $name){
+        $mail = new PHPMailer;
+
+        $mail->SMTPDebug = 3;                               // Enable verbose debug output
+
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = MAILHOST;
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = EMAIL;                 // SMTP username
+        $mail->Password = PASSWORD;                           // SMTP password
+        $mail->SMTPSecure = ENCRYPTION;                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = PORT;                                    // TCP port to connect to
+
+        $mail->setFrom('hi@ijtaba.me.uk', 'Dine Bot');
+        $mail->addAddress('ijtabahussain@live.com', 'Ijtaba Hussain');     // Add a recipient
+        $mail->addReplyTo($email, 'Information');
+        $mail->isHTML(true);                                  // Set email format to HTML
+
+        $mail->Subject = "$name wants to meet up";
+        $mail->Body    = $body;
+
+        if(!$mail->send()) {
+            error_log('Mailer Error: ' . $mail->ErrorInfo);
+            return 'Message could not be sent.';
+        } else {
+            return 'Message has been sent';
+        }
+    }
 
     function verify_captcha(){
         $ip      = $_SERVER["REMOTE_ADDR"];
         $url     = 'https://www.google.com/recaptcha/api/siteverify';
-        $data    = array('secret' => GOOGLE_RECAPTCHA , 'response' => $_POST['g-recaptcha-response'], 'remoteip' => $ip);
+        $data    = array('secret' => GOOGLE_RECAPTCHA , 'response' => $_GET['g-recaptcha-response'], 'remoteip' => $ip);
         $options = array(
                     'http' => array(
                                      'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
@@ -17,7 +45,7 @@
                          );
         $context  = stream_context_create($options);
         $result = json_decode(file_get_contents($url, false, $context));
-        var_dump($result);
+        return $result->success;
     }
 
 ?>
@@ -46,9 +74,10 @@
                                  "Email: $email\r\n" .
                                  "Reason: $why\r\n";
 
-                    if(verify_captcha()){
-                        send_mail($mail_text,$email);
-                    }
+//                    if(verify_captcha()){
+                        send_mail($mail_text,$email,$who);
+                        echo "Mail sent, now you must wait for me to respond.";
+//                    }
 
             ?>
         </div>

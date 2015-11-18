@@ -1,7 +1,5 @@
 <?php
-    include "google_calendar_key.php";
-    //todo - migrate to hi@ijtaba.me.uk
-    define("CALENDAR" ,"hi@ijtaba.me.uk");
+    include "secrets.php";
 
     function name(){
         if(isset($_GET["who"])) $name = $_GET["who"];
@@ -93,16 +91,15 @@
         $free_busy = [];
         $free_busy["timeMin"] = $start_datetime;
         $free_busy["timeMax"] = $end_datetime;
-        $free_busy["items"] = array(array("id" => CALENDAR));
+        $free_busy["items"] = array(array("id" => EMAIL));
 
-        $key = KEY;
+        $key = GOOGLE_CAL_KEY;
         $ch = curl_init("https://www.googleapis.com/calendar/v3/freeBusy?key=$key");
 
         curl_setopt_array($ch, array(
                                         CURLOPT_POST => TRUE,
                                         CURLOPT_RETURNTRANSFER => TRUE,
                                         CURLOPT_HTTPHEADER => array(
-                                                                     'Authorization: '.$authToken,
                                                                      'Content-Type: application/json'
                                                                    ),
                                         CURLOPT_POSTFIELDS => json_encode($free_busy)
@@ -110,14 +107,13 @@
                           );
 
         $response = curl_exec($ch);
-        
         if($response === false){
             //be ambigous on error
             return -1;
         }
         
         $responseData = json_decode($response, TRUE);
-        $busy = $responseData["calendars"][CALENDAR]["busy"];
+        $busy = $responseData["calendars"][EMAIL]["busy"];
     
         return count($busy);
     }
