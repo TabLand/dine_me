@@ -2,7 +2,7 @@
     require "functions.php";
 
     function send_mail($body, $email, $name){
-        $headers  = "From: Dine Bot <dine@ijtaba.me.uk>\r\n";
+        $headers  = "From: Dine Bot <alert@ijtaba.me.uk>\r\n";
         $headers .= "Reply-To: $name <$email>\r\n";
         $to       = "ijtabahussain@live.com";
         $subject  = "$name wants to meet up";
