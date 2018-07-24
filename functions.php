@@ -4,9 +4,8 @@
     function name(){
         if(isset($_GET["who"])) $name = $_GET["who"];
         else $name = "Paul Allen";
-        preg_match('/[A-Za-z ]+/', $name, $matches);
-
-        if(count($matches) > 0) return $matches[0];
+        preg_match('/[A-Za-z ,]+/', $name, $matches);
+        if(count($matches) > 0) return implode($matches,"");
         else return "Paul Allen";   
     }
 
