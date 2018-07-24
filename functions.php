@@ -32,7 +32,7 @@
         if(isset($_GET["when"])) $when = $_GET["when"];
         else $when = "tomorrow 1pm";
         preg_match('/[A-Za-z\-0-9\ ]+/', $when, $matches);
-        if(count($matches) > 0) return $matches[0];
+        if(count($matches) > 0) return implode($matches,"");
         else return "tomorrow 1pm";
     }
 
@@ -52,7 +52,7 @@
     function when(){
         $when = sanitize_when();
         if (($timestamp = strtotime("$when")) === false) {
-                return "a non-sensical time";
+                return "'$when' - a non-sensical time (failed to parse)";
         } else {
                 return date('l d F Y Hi', $timestamp);
         }
