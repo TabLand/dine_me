@@ -3,28 +3,28 @@
 
     function name(){
         if(isset($_GET["who"])) $name = $_GET["who"];
-        else $name = "Paul Allen";
+        else $name = "Tom, Dick and Harry";
         preg_match('/[A-Za-z ,]+/', $name, $matches);
         if(count($matches) > 0) return implode($matches,"");
-        else return "Paul Allen";   
+        else return "Tom, Dick and Harry";   
     }
 
     function place(){
         if(isset($_GET["where"])) $place = $_GET["where"];
-        else $place = "Dorsia";
+        else $place = "The Golden Chippy";
         preg_match('/[A-Za-z0-9, ]+/', $place, $matches);
 
         if(count($matches) > 0) return $matches[0];
-        else return "Dorsia";
+        else return "The Golden Chippy";
     }
 
     function reason(){
         if(isset($_GET["why"])) $reason = $_GET["why"];
-        else $reason = "you know the maitre d'";
+        else $reason = "I think something fishy is going on in there";
         preg_match('/[A-Za-z\.\' ,\-?]+/', $reason, $matches);
 
         if(count($matches) > 0) return $matches[0];
-        else return "I know the Maitre D'";   
+        else return "I think something fishy is going on in there";   
     }
 
     function sanitize_when(){

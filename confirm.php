@@ -24,7 +24,6 @@
 
                     if($busy == -1) $am_free_or_busy = "may be free at that time but am unable to confirm.";
                     elseif($busy) $am_free_or_busy = " am busy with $busy $commitments during that time.<br>
-                                                       Maybe its because I have to return some videotapes.<br>
                                                        Feel free to check my $schedule.";
                     else $am_free_or_busy = "am free at that time.";
 

@@ -10,7 +10,7 @@
         <div id="text">
             <form method="get" action="why.php">
                 Right <?php echo name(); ?>, where are we meeting up?<br/>
-                <input style="width:500px" type="text" name="where" placeholder="Dorsia, 3 Cromwell Road, Kensington, SW7 2HR"><br/>
+                <input style="width:500px" type="text" name="where" placeholder="The Golden Chippy, 62 Greenwich High Road, London SE10 8LF"><br/>
                 <input type="hidden" name="who" value="<?php echo name(); ?>"/>
                 <input class="submit" type="submit" value="Next">
             </form>
