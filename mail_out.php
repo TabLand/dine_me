@@ -53,7 +53,7 @@
 
                     if(verify_captcha()){
                         send_mail($mail_text,$email,$who);
-                        echo "Mail sent, now you must wait for me to respond.";
+                        echo "I've been notified, maybe we will meet up.";
                     }
                     else {
                         echo "Captcha failed, I don't dine with robots";

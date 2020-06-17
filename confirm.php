@@ -33,7 +33,7 @@
                     }
                     else {
                         $a_valid_email = "invalid";
-                        $may_or_may_not = "may not";
+                        $may_or_may_not = "will not";
                     }
                     echo "So your name is $who.<br>" . 
                          "You want to meet at $where on $when hours for $duration $hours because $why.<br>" .
