@@ -10,7 +10,7 @@
         <div id="text">
             <form method="get" action="confirm.php">
                 Finally, what's your email?<br/>
-                <input style="width: 500px;" type="email" name="email" placeholder="tom_dick@harry.com"/><br/>
+                <input style="width: 500px;" type="email" name="email" placeholder="pallen@pierceandpierce.com"/><br/>
                 <input type="hidden" name="duration" value="<?php echo duration(); ?>"/>
                 <input type="hidden" name="when" value="<?php echo when(); ?>"/>
                 <input type="hidden" name="why" value="<?php echo reason(); ?>"/>
