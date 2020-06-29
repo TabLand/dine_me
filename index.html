@@ -1,12 +1,34 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
-	<head>
-		<title>Dine Me!</title>
-		<link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="dine.css">
-	</head>
-	<body id="outer">
-        <iframe id="plate_frame" src="intro.html" scrolling="no"></iframe>
-        <object style="display:hidden; height:0px; width:0px;" data="sussudio-8bit.mp3" type="audio/mp3"></object>
-	</body>
+  <head>
+    <title>Dine Me!</title>
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="dine.css">
+    <script src="dine.js"></script>
+  </head>
+  <body id="outer" onload="animate_mask()">
+    <div id="plate_frame">
+    </div>
+    <div id="text">
+      <a name="start">Dine Me!</a><br/><br/>
+      So, You asked me to lunch, and I sent you this link.
+      Not to worry, just taking some necessary info.<br/><br/>
+      <div id="volume">
+        <a href="#who" onclick="proceed_with_sound()">&#x1F50A;</a>
+        &nbsp; &nbsp;
+        <a href="#who" onclick="proceed_without_sound()">&#x1F507;</a>
+      </div>
+    </div>
+    <audio id="audio" loop>
+      <source src="sussudio-8bit.mp3" type="audio/mpeg">
+    </audio>
+    <svg width="600px" height="1000%">
+      <defs>
+          <mask id="plate" x="0" y="0" width="600px" height="1000%">
+              <rect width="600px" height="1000%" fill="black"></rect>
+              <circle id="circle_mask" fill="white" r="300" cx="300" cy="50"></circle>
+          </mask>
+      </defs>
+    </svg>
+  </body>
 </html>

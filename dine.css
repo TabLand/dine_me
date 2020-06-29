@@ -5,58 +5,46 @@
 }
 
 body,input,button {
-	font-family:'Josefin Sans',cicle;
-	font-size: 25px;
-	text-align: center;
+    font-family:'Josefin Sans',cicle;
+    font-size: 25px;
+    text-align: center;
 }
 
 a    {
-	text-decoration: none;
-	color: red
+    text-decoration: none;
+    color: red
 }
 
 html,body {
-    height: 90%;
+    height:300%;
     width: 100%;    
 }
 
 body {
-	background-color: transparent;
-	color: black;
-    overflow-x: hidden;
-    -webkit-transform-style: preserve-3d;
-    -moz-transform-style: preserve-3d;
-    transform-style: preserve-3d;
+    background-color: transparent;
+    color: black;
+    overflow-x:hidden;
 }
 
 body#outer{
-	background-image:url('diningCloth.png');
-	text-align:center;
-}
-
-#plate{
-    height: 540px;
-	width: 540px;
-    text-align: center;
-    padding: 30px;
+    background-image:url('diningCloth.png');
+    text-align:center;
 }
 
 div.g-recaptcha > div > div {
     margin: auto;
 }
 
-iframe#plate_frame {
+#plate_frame {
     height: 600px;
     width: 600px;
-    overflow: hidden;
     border: none;
     background-image: url('plate.png');
-}
-
-div#text{
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    margin-left: -300px;
+    z-index: -1;
 }
 
 input.submit{
@@ -64,6 +52,13 @@ input.submit{
     border: none;
     color: red;    
 }
+
+div#text{
+  width: 600px;  
+  margin: 300px auto 0px auto;
+  mask: url("#plate");
+}
+
 div.g-recaptcha{
     width: 304px;
     margin: 0 auto 0 auto;    
