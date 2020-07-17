@@ -6,29 +6,46 @@
     <link rel="stylesheet" type="text/css" href="dine.css">
     <script src="dine.js"></script>
   </head>
-  <body id="outer" onload="animate_mask()">
+  <body id="outer" onload="setup()">
     <div id="plate_frame">
     </div>
+    <div id="half_time">&nbsp;
+    </div>
     <div id="text">
-      <a name="start">Dine Me!</a><br/><br/>
-      So, You asked me to lunch, and I sent you this link.
-      Not to worry, just taking some necessary info.<br/><br/>
-      <div id="volume">
-        <a href="#who" onclick="proceed_with_sound()">&#x1F50A;</a>
-        &nbsp; &nbsp;
-        <a href="#who" onclick="proceed_without_sound()">&#x1F507;</a>
-      </div>
+      <form method="get" action="test.php">
+        
+        <div class="page">
+          <a name="start">Dine Me!</a><br/><br/>
+          So, You asked me to lunch, and I sent you this link.
+          Not to worry, just taking some necessary info.<br/><br/>
+          <div id="volume">
+            <a href="#who" onclick="proceed_with_sound()">&#x1F50A;</a>
+            &nbsp; &nbsp;
+            <a href="#who" onclick="proceed_without_sound()">&#x1F507;</a>
+          </div>
+        </div><br/>
+
+        <div class="page">
+          <a name="who">
+            Who are you?
+          </a><br/><br/>
+          <input type="text" name="who" placeholder="Paul Allen"><br/><br/>
+          <a href="#where">Next</a>
+        </div><br/>
+
+        <div class="page">
+          Right <span class="your_name">____YOUR NAME___</span>....<br/><br/>
+          <a name="where">
+            Where are we meeting up?
+          </a><br/><br/>
+          <input style="width:500px" type="text" name="where" placeholder="Dorsia, 3 Cromwell Road, Kensington, SW7 2HR"><br/><br/>
+          <a href="#why">Next</a>
+        </div><br/>
+
+      </form>
     </div>
     <audio id="audio" loop>
       <source src="sussudio-8bit.mp3" type="audio/mpeg">
     </audio>
-    <svg width="600px" height="1000%">
-      <defs>
-          <mask id="plate" x="0" y="0" width="600px" height="1000%">
-              <rect width="600px" height="1000%" fill="black"></rect>
-              <circle id="circle_mask" fill="white" r="300" cx="300" cy="50"></circle>
-          </mask>
-      </defs>
-    </svg>
   </body>
 </html>
